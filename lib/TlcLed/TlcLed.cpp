@@ -3,8 +3,7 @@
 #include "TlcLed.h"
 
 #define MIN_INTENSITY 4095
-#define MAX_INTENSITY 3072
-
+#define MAX_INTENSITY_DEFAULT 3072
 
 // Mono strip# ==> TLC channel#
 const TLC_CHANNEL_TYPE STRIP_CHANNEL_LOOKUP[] = {
@@ -19,16 +18,22 @@ const strip_t RGB_STRIP_LOOKUP[] = {
 };
 
 uint16_t CTlcLed::intensityValue(val_t intensity) {
-  return map(intensity, 0, 255, MIN_INTENSITY, MAX_INTENSITY);
+  return map(intensity, 0, 255, MIN_INTENSITY, _max_intensity_value);
 }
 
 val_t CTlcLed::valueIntensity(uint16_t value) {
-  return map(value, MIN_INTENSITY, MAX_INTENSITY, 0, 255);
+  return map(value, MIN_INTENSITY, _max_intensity_value, 0, 255);
 }
 
 void CTlcLed::init() {
-    Tlc.init(MIN_INTENSITY);
+  init(MAX_INTENSITY_DEFAULT);
 }
+
+void CTlcLed::init(uint16_t max_intensity_value) {
+  _max_intensity_value = max_intensity_value;
+  Tlc.init(MIN_INTENSITY);
+}
+
 
 void CTlcLed::clear() {
   Tlc.setAll(MIN_INTENSITY);

@@ -31,7 +31,9 @@ void setup() {
   TlcLed.clear();
 
   cycler1 = new ColorCycler(NUM_COLORS1, COLORS1, DURATIONS1);
+  cycler1.start();
   cycler2 = new ColorCycler(NUM_COLORS2, COLORS2, DURATIONS2);
+  cycler2.start(500); // Start with a delay
 }
 
 void loop() {

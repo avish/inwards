@@ -7,7 +7,6 @@
 typedef uint8_t strip_t;
 typedef uint8_t val_t;
 
-
 struct rgb_t {
   val_t r;
   val_t g;
@@ -41,11 +40,19 @@ struct rgb_t {
 
 class CTlcLed {
   private:
+    uint16_t _max_intensity_value;
     uint16_t intensityValue(val_t intensity);
     val_t valueIntensity(uint16_t value);
 
   public:
+    // Initialize the driver board
     void init();
+
+    // Initialize the driver board using a custom max intensity value
+    // (0 == Brightest, burns boards, default = 3072)
+    void init(uint16_t max_intensity_value);
+
+    // Clear all the LEDs
     void clear();
 
     void setAllMono(val_t val);
