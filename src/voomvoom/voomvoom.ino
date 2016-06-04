@@ -1,3 +1,7 @@
+// VOOMVOOM
+// for Backstage Group's INWARDS
+// by Avish
+
 #include <TlcLed.h>
 
 #define NUM_STRIPS 30     // Number of strips we control
